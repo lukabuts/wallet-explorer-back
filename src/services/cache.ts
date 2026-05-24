@@ -1,13 +1,17 @@
 import NodeCache from "node-cache";
+
 const cache = new NodeCache({ stdTTL: 30, checkperiod: 60 });
 
-export const getCached = async (key: string, fn: () => Promise<any>) => {
-  let data = cache.get(key);
-  if (data !== undefined) {
-    return data;
+export const getCached = async <T>(
+  key: string,
+  fn: () => Promise<T>,
+): Promise<T> => {
+  const cached = cache.get<T>(key);
+  if (cached !== undefined) {
+    return cached;
   }
 
-  data = await fn();
+  const data = await fn();
   cache.set(key, data);
   return data;
 };
