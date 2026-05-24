@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { getChain } from "./getChain";
+import { getChain } from "./chains";
 import { ChainKey } from "@/constants";
 
 export const getBalance = async ({
