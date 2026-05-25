@@ -8,12 +8,13 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "tsc-alias": "^1.8.17",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3"
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
-    "build": "tsc"
+    "build": "tsc -p tsconfig.app.json && tsc-alias -p tsconfig.app.json"
   }
 }
