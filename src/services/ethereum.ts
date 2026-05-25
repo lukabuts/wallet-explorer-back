@@ -58,6 +58,7 @@ export const getTokens = async ({
     "function balanceOf(address) view returns (uint256)",
     "function symbol() view returns (string)",
     "function decimals() view returns (uint8)",
+    "function name() view returns (string)",
   ];
 
   const provider = getChain(chain);
@@ -83,15 +84,17 @@ export const getTokens = async ({
         ERC20_ABI,
         provider,
       );
-      const [balance, symbol, decimals] = await Promise.all([
+      const [balance, symbol, decimals, name] = await Promise.all([
         contract.balanceOf(address),
         contract.symbol(),
         contract.decimals(),
+        contract.name(),
       ]);
       return {
-        contract: contractAddress,
+        contractAddress,
         symbol,
         balance: ethers.formatUnits(balance, decimals),
+        name,
       };
     }),
   );
